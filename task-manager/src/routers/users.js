@@ -3,6 +3,8 @@ const router = new express.Router()
 const User = require('../models/user')
 const auth = require('../middleware/auth')
 const Task = require('../models/task')
+const multer  = require('multer')
+
 
 
 // Add user
@@ -94,7 +96,17 @@ router.post("/users", async (req, res) => {
     }
 })
 
+const upload = multer({ 
+  dest: 'avatars',
+  limits: {
+    fileSize: 1000000
+  }
+})
 
+router.post('/users/me/avatar', upload.single('avatar'), async (req, res) => {
+
+  res.status(200).send()
+})
 
 
 module.exports = router

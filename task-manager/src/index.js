@@ -3,6 +3,7 @@ require("./db/mongoose");
 
 const userRouter = require ('./routers/users')
 const tasksRouter = require('./routers/tasks')
+const uploadsRouter = require('./routers/uploads')
 const morgan = require('morgan')
 
 
@@ -14,7 +15,7 @@ app.use(morgan('tiny'))
 app.use(express.json());
 app.use(userRouter)
 app.use(tasksRouter)
-
+app.use(uploadsRouter)
 
 
 app.listen(port, () => {
@@ -22,18 +23,4 @@ app.listen(port, () => {
 });
 
 
-// const Task = require('./models/task')
-// const User = require('./models/user')
-// const main = async () => {
-//   // const task = await Task.findById('61bff1b639088f40086f8f3d')
-//   // console.log(task)
-//   // await task.populate('owner').execPopulate()
-//   // console.log(task.owner)
 
-  
-//   const user = await User.findById('61bffcb5e401e925587d9477')
-//   await user.populate('tasks').execPopulate()
-//   console.log(user.tasks)
-// }
-
-// main()
