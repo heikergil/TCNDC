@@ -1,4 +1,5 @@
 const express = require('express')
+const app = express()
 const multer  = require('multer')
 const router = new express.Router()
 
@@ -17,15 +18,13 @@ const upload = multer({
     }
  })
 
- const errorMiddleware = (req, res, next) => {
-     throw new Error('From my middleware')
- }
 
-router.post('/upload', errorMiddleware, upload.single('upload'), async (req, res) => {
+
+router.post('/upload', upload.single('upload'), async (req, res) => {
     
    res.send()
 }, (error, req, res, next) => {
-    res.status(400).send()
+    res.status(400).send({Error: error.message})
 })
 
 
